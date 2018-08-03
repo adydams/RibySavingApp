@@ -1,0 +1,41 @@
+button {
+    background-color: ; /* Green */
+    border-radius: 20px ;
+    color: blue;
+    padding: 1px 18px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin-right: 4px;
+    margin-left: 5px;
+}
+.topnav a{
+ padding: 25px;
+ color: blue;
+ font-family: "Times New Roman";
+}
+input{
+  border-radius: 20px;
+  padding: 5px;
+  font-size: 1em;
+}
+div.solid {
+  text-align: center;
+  border-style: solid;
+  box-sizing: Auto;
+  width: 300px;
+  height: 120px;
+  padding: 50px;    
+  }
+body{
+background-image: url("https://res.cloudinary.com/dxfkhy4t9/image/upload/v1532600883/backgroundImageWithStudents.png");
+  text-align: center;
+}
+.solid{
+  text-align: center;
+  width: 300px;
+  margin: 0 auto 0 auto;
+  margin-top: 70px; 
+  
+}

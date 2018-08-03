@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <link "https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
+  <link rel="stylesheet" href="./style.css"></link>
+
+
+  <script type="text/javascript">
+            auth= function(){
+                var xhttp = new XMLHttpRequest();
+                data={name:document.getElementById("userId").value}
+                xhttp.onreadystatechange = function() {
+                    if (xhttp.readyState==4 && xhttp.status==200) {
+                        var response = JSON.parse(xhttp.responseText);
+                        document.getElementById("token").innerHTML = response.token;
+                    }
+                    if(xhttp.readyState==4 && xhttp.status==403){
+                      document.getElementById("token").innerHTML=JSON.parse(xhttp.responseText).message;
+                    }
+                };
+                xhttp.open("POST", "http://localhost:3000/users/login", true);
+                xhttp.setRequestHeader("Content-type", 'application/json; charset=UTF-8');
+                xhttp.send(JSON.stringify(data));
+            }
+            getlist= function(){
+                var xhttp = new XMLHttpRequest();
+               data={token:document.getElementById("token").value}
+                xhttp.onreadystatechange = function() {
+                    if (xhttp.readyState==4 && xhttp.status==200) {
+                        var response = JSON.parse(xhttp.responseText);
+                        var ul=document.createElement("ul");
+                        for(var i=0;i<response.users.length;i++){
+                            var li=document.createElement("li");
+                            li.appendChild(document.createTextNode(response.users[i].name));
+                            ul.appendChild(li);
+                        }
+                        document.getElementById("list").appendChild(ul);
+                    }
+                    if(xhttp.readyState==4 && xhttp.status==403){
+                      document.getElementById("list").innerHTML=JSON.parse(xhttp.responseText).message;
+                    }
+                };
+                xhttp.open("POST", "http://localhost:3000/savingsPlan.html", true);
+                xhttp.setRequestHeader("Content-type", 'application/json; charset=UTF-8');
+                xhttp.send(JSON.stringify(data));
+            }
+        </script>
+
+
+
+
+<title>Savings App</title>
+</head>
+<body>
+
+<h1>Welcome to Riby Savings App</h1>
+
+<form method="post" action="/saves">
+      <div class="topnav" id="myTopnav">
+        <a href="#" >Home</a>
+        <a href="#" class="active">Create Saving Plans</a>
+        <a href="#">Withdraw Savings</a>
+        <a href="#">About</a>
+        <a href="javascript:void(0);" class="icon" onclick="myFunction()">&#9776;</a>
+      </div><br>
+      <div class= "solid">
+        <div>
+          User Id: <input type="text" class="userId" name="userId" id="userId" placeholder ="userId" />
+          </div>
+          <br>
+          Amount: <input type="text" class="amount" name="amount" id="amount" placeholder ="amount" /></div>
+         <br>
+        
+          Duration: <input type="text" class="duration" name="duration" id="duration" placeholder ="savings duration" /><br>
+          <br>
+          Token: <input type="text" class ="token" name="token" id="token" />  <br>    
+          <br>
+          Select your Savings Plan: <br><div class="dropdown" name="savingsPlan">
+
+                <input type="checkbox" name="Housing Bill" value="Housing Plan"> Housing Bill<br>
+                <input type="checkbox" name="PHCN Bill" value="PHCN Plan"> PHCN<br>
+                <input type="checkbox" name="Events" value="Event" checked> Events<br>
+
+                <br>         
+        <div> <button type="submit">Submit </button> </div>
+
+     <div>  
+</form>
+
+</body>
+</html>
